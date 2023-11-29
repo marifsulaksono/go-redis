@@ -26,4 +26,19 @@ func main() {
 	}
 
 	fmt.Println("set operation success")
+
+	// get stored data
+	opGet := dbRedis.Get(context.Background(), key)
+	if err := opGet.Err(); err != nil {
+		fmt.Printf("failed to get data : %v", err)
+		return
+	}
+
+	res, err := opGet.Result()
+	if err != nil {
+		fmt.Printf("failed to get data : %v", err)
+		return
+	}
+
+	fmt.Println("get operation success: ", res)
 }
